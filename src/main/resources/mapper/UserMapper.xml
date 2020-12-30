@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.iois.funeral.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.iois.funeral.entity.User">
+        <id column="uid" jdbcType="CHAR" property="uid" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+
+    <select id="getUserById" parameterType="String" resultMap="BaseResultMap">
+        SELECT * FROM `user` WHERE uid=#{uid};
+    </select>
+
+    <select id="getRelByUserId" parameterType="String" resultType="com.iois.funeral.entity.RelationUserDead">
+        SELECT * FROM rel_user_dead WHERE user_id=#{user_id};
+    </select>
+
+    <select id="getDeadById" parameterType="String" resultType="com.iois.funeral.entity.Dead">
+        SELECT * FROM dead WHERE uid=#{uid};
+    </select>
+
+    <insert id="addOneUser" parameterType="com.iois.funeral.entity.User">
+        INSERT INTO user(uid, name, password) VALUE (#{uid},#{name},#{password});
+    </insert>
+
+    <insert id="addOneDead" parameterType="com.iois.funeral.entity.Dead">
+        INSERT INTO dead(uid, stage) VALUE (#{uid},#{stage});
+    </insert>
+
+    <insert id="addOneRel" parameterType="com.iois.funeral.entity.RelationUserDead">
+        INSERT INTO rel_user_dead(user_id, dead_id) VALUE (#{user_id},#{dead_id});
+    </insert>
+
+    <delete id="dropOneUser" parameterType="String">
+        DELETE FROM user WHERE uid=#{uid};
+    </delete>
+
+    <delete id="dropOneDead" parameterType="String">
+        DELETE FROM dead WHERE uid=#{uid};
+    </delete>
+
+    <delete id="dropOneRel" parameterType="com.iois.funeral.entity.RelationUserDead">
+        DELETE FROM rel_user_dead WHERE user_id=#{user_id} AND dead_id=#{dead_id};
+    </delete>
+
+</mapper>
