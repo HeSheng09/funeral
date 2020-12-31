@@ -32,26 +32,27 @@ public class RouteServiceImpl implements RouteService {
     private void stageHandler(int stage){
         switch(stage){
             case 0:
-                // stage 0: 确定亲属关系，无死亡证明=>前往开办死亡证明
+                // stage 0: 未确定亲属关系，或无效的关联
                 stage0();
                 break;
             case 1:
-                // stage 1: 已开具死亡证明，未火化=>殡仪馆选择
+                // stage 1: 确定亲属关系，无死亡证明=>前往开办死亡证明
                 stage1();
                 break;
             case 2:
-                // stage 2： 已火化，未下葬=>墓地选择
+                // stage 2： 已开具死亡证明，未火化=>殡仪馆选择
                 stage2();
                 break;
             case 3:
-                // stage 3： 已下葬，财产未分割=>分割财产
+                // stage 3： 已火化，未下葬=>墓地选择
                 stage3();
                 break;
             case 4:
-                // stage 4: 财产分割完毕，所有流程结束
+                // stage 4: 已下葬，财产未分割=>分割财产
                 stage4();
                 break;
             case 5:
+                // stage 5: 财产分割完毕，所有流程结束
                 stage5();
                 break;
         }

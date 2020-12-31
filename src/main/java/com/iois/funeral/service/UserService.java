@@ -38,4 +38,5 @@ public interface UserService {
     * @Date: 2020/12/30
     */ 
     public boolean attachDead2User(User user);
+
 }
